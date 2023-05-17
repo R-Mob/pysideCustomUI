@@ -21,9 +21,6 @@ class TestDialog(QtWidgets.QDialog):
         l.addWidget(QtWidgets.QPushButton())
 
 
-
-
-
 if __name__ == "__main__":
 
     d = TestDialog(parent=maya_main_window())
