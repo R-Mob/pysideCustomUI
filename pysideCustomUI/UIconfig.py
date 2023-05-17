@@ -19,7 +19,32 @@ class TestDialog(QtWidgets.QDialog):
 
         self.setWindowTitle('Test_Dialog')
         self.setMinimumWidth(250)
-        self.setMinimumHeight(500)
+        #self.setMinimumHeight(500)
+
+        self.createWidgets()
+        self.createLayouts()
+
+    def createWidgets(self):
+        self.lineedit = QtWidgets.QLineEdit()
+        self.checkbox1 = QtWidgets.QCheckBox("checkbox1")
+        self.checkbox2 = QtWidgets.QCheckBox("checkbox2")
+        self.ok_btn = QtWidgets.QPushButton("OK")
+        self.cncl_btn = QtWidgets.QPushButton("Cancel")
+
+    def createLayouts(self):
+        btn_layout = QtWidgets.QHBoxLayout()
+        btn_layout.addWidget(self.ok_btn)
+        btn_layout.addWidget(self.cncl_btn)
+
+        main_layout = QtWidgets.QVBoxLayout(self)
+        main_layout.addWidget(self.lineedit)
+        main_layout.addWidget(self.checkbox1)
+        main_layout.addWidget(self.checkbox2)
+
+
+        main_layout.addLayout(btn_layout)
+
+
 
 
 if __name__ == "__main__":
