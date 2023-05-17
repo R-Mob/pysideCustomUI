@@ -1,7 +1,6 @@
 #This is a UI setup file using pyside2
 
-
-
+import sys
 from PySide2 import QtCore
 from PySide2 import QtWidgets
 from shiboken2 import wrapInstance
@@ -15,16 +14,15 @@ def maya_main_window():
     return mainWindow
 
 class TestDialog(QtWidgets.QDialog):
-    def __int__(self,parent= None):
-        super(TestDialog, self).__init__(parent=parent)
-        l = QtWidgets.QVBoxLayout(self)
-        l.addWidget(QtWidgets.QPushButton())
+    def __init__(self,parent):
+        super(TestDialog, self).__init__(parent)
+
+        self.setWindowTitle('Test_Dialog')
+        self.setMinimumWidth(250)
+        self.setMinimumHeight(500)
 
 
 if __name__ == "__main__":
 
     d = TestDialog(parent=maya_main_window())
     d.show()
-
-
-
