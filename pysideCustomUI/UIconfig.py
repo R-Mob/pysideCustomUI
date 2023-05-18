@@ -1,53 +1,75 @@
 #This is a UI setup file using pyside2
 
-import sys
 from PySide2 import QtCore
 from PySide2 import QtWidgets
 from shiboken2 import wrapInstance
-
 import maya.OpenMayaUI as omui
 
-
-def maya_main_window():
+def mayaMainWindow():
     main_window_ptr = omui.MQtUtil.mainWindow()
-    mainWindow =  wrapInstance(int(main_window_ptr), QtWidgets.QWidget)
-    return mainWindow
+    return wrapInstance(int(main_window_ptr), QtWidgets.QWidget)
 
-class TestDialog(QtWidgets.QDialog):
-    def __init__(self,parent):
-        super(TestDialog, self).__init__(parent)
+class RenamerUI(QtWidgets.QDialog):
+    def __init__(self, parent = mayaMainWindow()):
+        super(RenamerUI,self).__init__(parent)
 
-        self.setWindowTitle('Test_Dialog')
-        self.setMinimumWidth(250)
-        #self.setMinimumHeight(500)
+        self.setWindowTitle("Renamer Tool")
+        self.setMinimumHeight(300)
+        self.setMaximumHeight(300)
+        self.setMinimumWidth(300)
+        self.setMaximumWidth(300)
 
-        self.createWidgets()
-        self.createLayouts()
+        self.renamerWidget()
+        self.renamerLayout()
 
-    def createWidgets(self):
-        self.lineedit = QtWidgets.QLineEdit()
-        self.checkbox1 = QtWidgets.QCheckBox("checkbox1")
-        self.checkbox2 = QtWidgets.QCheckBox("checkbox2")
-        self.ok_btn = QtWidgets.QPushButton("OK")
-        self.cncl_btn = QtWidgets.QPushButton("Cancel")
+    def renamerWidget(self):
+        self.startRe = QtWidgets.QLabel("Start #:")
+        self.paddingRe = QtWidgets.QLabel("Padding #:")
+        self.renamer_lineEdit = QtWidgets.QLineEdit()
+        self.start_lineEdit = QtWidgets.QLineEdit()
+        self.padding_lineEdit = QtWidgets.QLineEdit()
+        self.renAndNum_btn = QtWidgets.QPushButton("Rename and Number")
 
-    def createLayouts(self):
-        btn_layout = QtWidgets.QHBoxLayout()
-        btn_layout.addWidget(self.ok_btn)
-        btn_layout.addWidget(self.cncl_btn)
+
+
+
+    def renamerLayout(self):
+        grid_layout = QtWidgets.QGridLayout()
+
+        grid_layout.addWidget(self.startRe, 1, 0)
+        grid_layout.addWidget((self.start_lineEdit), 1, 1)
+        grid_layout.addWidget(self.paddingRe, 1, 2)
+        grid_layout.addWidget((self.padding_lineEdit), 1, 3)
+
+        form_layout = QtWidgets.QFormLayout()
+        form_layout.addRow("Rename :" , self.renamer_lineEdit)
+
+
+        sectionA_layout = QtWidgets.QVBoxLayout()
+        sectionA_layout.addLayout(form_layout)
+        sectionA_layout.addLayout(grid_layout)
+        sectionA_layout.addWidget(self.renAndNum_btn)
+        sectionA_layout.addStretch()
+
+
+
+
 
         main_layout = QtWidgets.QVBoxLayout(self)
-        main_layout.addWidget(self.lineedit)
-        main_layout.addWidget(self.checkbox1)
-        main_layout.addWidget(self.checkbox2)
+        main_layout.addLayout(sectionA_layout)
 
 
-        main_layout.addLayout(btn_layout)
 
 
 
 
 if __name__ == "__main__":
 
-    d = TestDialog(parent=maya_main_window())
-    d.show()
+    try:
+        renamerUI.close()
+        renamerUI.deleteLater()
+    except:
+        pass
+
+    renamerUI = RenamerUI(parent=mayaMainWindow())
+    renamerUI.show()
