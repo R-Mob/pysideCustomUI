@@ -13,9 +13,9 @@ class RenamerUI(QtWidgets.QDialog):
     def __init__(self, parent = mayaMainWindow()):
         super(RenamerUI,self).__init__(parent)
 
-        self.setWindowTitle("[Mobius] Renamer Tool v0.1")
-        self.setMinimumHeight(400)
-        self.setMaximumHeight(400)
+        self.setWindowTitle("[Mobius] Renamer Tool v1.00")
+        self.setMinimumHeight(470)
+        self.setMaximumHeight(470)
         self.setMinimumWidth(360)
         self.setMaximumWidth(360)
 
@@ -29,6 +29,7 @@ class RenamerUI(QtWidgets.QDialog):
         self.start_lineEdit = QtWidgets.QLineEdit()
         self.padding_lineEdit = QtWidgets.QLineEdit()
         self.renAndNum_btn = QtWidgets.QPushButton("Rename and Number")
+        self.renAndAlph_btn = QtWidgets.QPushButton("Rename and Alphabet")
 
         self.removeLavel = QtWidgets.QLabel("Remove...  ")
         self.firstCharBtn = QtWidgets.QPushButton("First Character-->")
@@ -36,6 +37,8 @@ class RenamerUI(QtWidgets.QDialog):
 
         self.intersection = QtWidgets.QLabel("-----------------------------------------------------------------------------------")
         self.intersection1 = QtWidgets.QLabel(
+            "-----------------------------------------------------------------------------------")
+        self.intersection2 = QtWidgets.QLabel(
             "-----------------------------------------------------------------------------------")
 
         self.hashLabel = QtWidgets.QLabel("Hash Rename   ")
@@ -55,6 +58,15 @@ class RenamerUI(QtWidgets.QDialog):
         self.jntBtn = QtWidgets.QPushButton("_jnt")
         self.drvBtn = QtWidgets.QPushButton("_drv")
 
+        self.searchLable = QtWidgets.QLabel("Search :")
+        self.searLineEdit =QtWidgets.QLineEdit()
+        self.replaceLable = QtWidgets.QLabel("Replace :")
+        self.replaceLineEdit = QtWidgets.QLineEdit()
+        self.hieRbt = QtWidgets.QRadioButton("Hierarchy")
+        self.selRbt = QtWidgets.QRadioButton("Selected")
+        self.AllRbt = QtWidgets.QRadioButton("All")
+        self.applyBtn = QtWidgets.QPushButton("Apply")
+
 
     def renamerLayout(self):
         grid_layout = QtWidgets.QGridLayout()
@@ -71,6 +83,7 @@ class RenamerUI(QtWidgets.QDialog):
         sectionA_layout.addLayout(form_layout)
         sectionA_layout.addLayout(grid_layout)
         sectionA_layout.addWidget(self.renAndNum_btn)
+        sectionA_layout.addWidget(self.renAndAlph_btn)
 
         sectionB_layout = QtWidgets.QHBoxLayout()
         sectionB_layout.addWidget(self.removeLavel)
@@ -111,12 +124,37 @@ class RenamerUI(QtWidgets.QDialog):
         sectionC_Flayout.addLayout(sectionC_ALayout)
         sectionC_Flayout.addLayout(sectionC_BLayout)
         sectionC_Flayout.addLayout(sectionD_layout)
-        sectionC_Flayout.addStretch()
+
+        sectionE_layout = QtWidgets.QHBoxLayout()
+        sectionE_layout.addStretch()
+        sectionE_layout.addWidget(self.hieRbt)
+        sectionE_layout.addStretch()
+        sectionE_layout.addWidget(self.selRbt)
+        sectionE_layout.addStretch()
+        sectionE_layout.addWidget(self.AllRbt)
+        sectionE_layout.addStretch()
+
+        sectionE_ALayout = QtWidgets.QHBoxLayout()
+        sectionE_ALayout.addWidget(self.searchLable)
+        sectionE_ALayout.addWidget(self.searLineEdit)
+
+        sectionE_Blayout = QtWidgets.QHBoxLayout()
+        sectionE_Blayout.addWidget(self.replaceLable)
+        sectionE_Blayout.addWidget(self.replaceLineEdit)
+
+        sectionE_Flayout = QtWidgets.QVBoxLayout()
+        sectionE_Flayout.addWidget(self.intersection2)
+        sectionE_Flayout.addLayout(sectionE_ALayout)
+        sectionE_Flayout.addLayout(sectionE_Blayout)
+        sectionE_Flayout.addLayout(sectionE_layout)
+        sectionE_Flayout.addWidget(self.applyBtn)
+        sectionE_Flayout.addStretch()
 
         main_layout = QtWidgets.QVBoxLayout(self)
         main_layout.addLayout(sectionA_layout)
         main_layout.addLayout(sectionB_FLayout)
         main_layout.addLayout(sectionC_Flayout)
+        main_layout.addLayout(sectionE_Flayout)
 
 
 
